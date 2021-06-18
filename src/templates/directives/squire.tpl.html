@@ -1,0 +1,27 @@
+<div class='angular-squire fill squire-container'>
+    <div class="squire-drozone-continer">
+        <div class="squire-dropzone">
+            <span translate-context="Info" translate>Drop an image here to insert</span>
+        </div>
+    </div>
+    <div class='editor-container fill'>
+        <div ng-if="isLoaded">
+            <squire-modal-listener
+                data-allow-embedded="allowEmbedded"
+                data-allow-data-uri="allowDataUri"
+                message="message"
+            ></squire-modal-listener>
+            <squire-toolbar class="squire-toolbar"></squire-toolbar>
+        </div>
+
+        <plain-text-area></plain-text-area>
+        <div class="angular-squire-wrapper fill">
+            <iframe
+                frameborder="0"
+                border="0"
+                marginwidth="0"
+                marginheight="0"
+                class="squireIframe"></iframe>
+        </div>
+    </div>
+</div>

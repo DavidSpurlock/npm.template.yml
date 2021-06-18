@@ -1,0 +1,40 @@
+<div id="conversation-list-rows" class="elementList-container-row" data-pt-select-multiple-elements>
+    <sticky-messages></sticky-messages>
+    <request-timeout></request-timeout>
+    <no-results ng-if="conversations.length === 0 && elementsLoaded"></no-results>
+    <section class="conversation-wrapper">
+        <div
+            ng-repeat="conversation in conversations track by conversation.ID"
+            data-pt-draggable-element
+            data-elements-container
+            class="conversation"
+            ng-class="getClassNames(conversation, markedElement)">
+            <span class="expiration">
+                <svg height="14" width="14" viewBox="0 0 14 14">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-expiration"></use>
+                </svg>
+            </span>
+            <pt-select-element data-index="{{ $index }}"></pt-select-element>
+            <pt-star
+                data-model="conversation"
+                class="singleStar"></pt-star>
+            <span class="senders ellipsis">
+                &nbsp;
+                <senders-name></senders-name>
+            </span>
+            <div class="subject">
+                <h4 ng-attr-title="{{ conversation.Subject | unescape }}">
+                    <states-elements></states-elements>
+                    <folders-element conversation="conversation"></folders-element>
+                    <span class="subject-num-message" ng-if="conversation.NumMessages > 1">({{ conversation.NumMessages }})</span>
+                    <span class="subject-text ellipsis">{{ conversation.Subject  | unescape }}</span>
+                </h4>
+                <labels-element element="conversation"></labels-element>
+            </div>
+            <span class="size">{{ size(conversation)| bytes }}</span>
+            <i class="fa fa-paperclip conversation-icon-attachment"></i>
+            <time-element></time-element>
+        </div>
+    </section>
+    <search-limit-reached ng-if="elementsLoaded && limitReached"></search-limit-reached>
+</div>

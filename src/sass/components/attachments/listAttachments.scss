@@ -1,0 +1,210 @@
+.listAttachments-container.hidden {display: none}
+
+.listAttachments-container {padding: 0 10px}
+.state-eoReply.listAttachments-container {padding: 0 35px}
+
+.listAttachments-item {
+    padding-left: 3rem;
+    padding-right: .5rem;
+    > * * { pointer-events: none }
+}
+
+[class*="listAttachments-icon"] {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2.5rem;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    z-index: 2;
+    color: $default-color;
+    font-size: 22px;
+
+    &.file-inner-icon {
+        font-size: 12px;
+    }
+    &.stuff {
+        opacity: 0;
+    }
+    &.embedded{
+        color:$primary;
+    }
+    &.stuff.fa-cog,
+    &.stuff.fa-download {
+        opacity: 1;
+        border-right: none;
+    }
+}
+
+.listAttachments-icon-loader,
+.listAttachments-icon-download { display: none }
+
+.listAttachments-item-decrypt .listAttachments-icon-loader { display: inline-block }
+.listAttachments-item-download .listAttachments-icon-download { display: inline-block }
+
+
+.listAttachments-signature-warning, .listAttachments-signature-ok, .listAttachments-unencrypted-warning {
+    display: none;
+    position: absolute;
+    line-height: 12px;
+    z-index: 2;
+
+    .fa-stack {
+        line-height: 1.6;
+    }
+
+    .listAttachments-modifier-shadow {
+        text-shadow: 1px 0px $light;
+        color: $light;
+        font-size: 2.5em;
+        left: -0.13em;
+        top: -0.2em;
+    }
+}
+
+.listAttachments-signature-warning, .listAttachments-signature-ok, .listAttachments-unencrypted-warning {
+    top: 21px;
+    font-size: 4.5px;
+    left: 25px;
+
+    .listAttachments-modifier-shadow {
+        font-size: 2.5em;
+        left: -0.13em;
+        top: -0.2em;
+    }
+}
+
+.listAttachments-unencrypted-warning {
+    top: 21px;
+    font-size: 4.5px;
+    left: 22px;
+
+    .listAttachments-modifier-shadow {
+        top: -0.2em;
+        font-size: 2.8em;
+        left: -0.1em;
+        overflow: hidden;
+    }
+}
+
+.listAttachments-signature-ok {
+    left: 23px;
+    font-size: 5.5px;
+    top: 18px;
+
+    .listAttachments-modifier-shadow {
+        font-size: 2.7em;
+        left: -0.05em;
+        top: -0.1em;
+    }
+}
+
+
+.listAttachments-signed-fail .listAttachments-signature-warning {
+    color: indianred;
+}
+
+.listAttachments-signature-ok {
+    color: green;
+}
+
+.listAttachments-unencrypted-warning {
+    color: orange;
+}
+
+.listAttachments-signed-fail .listAttachments-signature-warning,
+.listAttachments-signed-ok .listAttachments-signature-ok,
+.listAttachments-unencrypted .listAttachments-unencrypted-warning {
+    display: block;
+}
+
+.sent .listAttachments-signed-ok .listAttachments-signature-ok {
+    display: none;
+}
+
+.listAttachments-signed-fail .listAttachments-item .listAttachments-icon-modifier:before {
+    color: indianred;
+}
+
+.listAttachments-item-download .listAttachments-icon-loader,
+.listAttachments-item-decrypt .listAttachments-icon,
+.listAttachments-item-download .listAttachments-icon {display: none}
+
+/* NAooooon, but we need to override utilities... and don't break everything */
+.listAttachments-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    .listAttachments-att {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin: 0 10px 10px 0;
+        color: $default-color;
+        background: $white;
+        padding:0px;
+        position: relative;
+        height: 40px;
+        line-height: 40px;
+        background-color: $light;
+        max-width: 100%;
+        display: flex;
+
+        &:after{
+            content:"";
+            position: absolute;
+            z-index: 1;
+            left: 2.5rem;
+            top: 0;
+            bottom: 0;
+            height: 40px;
+            border-right: 1px solid $border;
+            pointer-events: none;
+        }
+
+        &.remove {
+            padding-right: 2.5rem;
+        }
+        .name {
+            text-transform: initial;
+            display: block;
+            margin-top: 5px;
+            line-height: 1.3;
+            white-space: nowrap;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: inline-block;
+            float: left;
+        }
+        .size {
+            display: block;
+            line-height: 1.2;
+            height: 15px;
+            padding-bottom: 5px;
+            float: left;
+            clear: both;
+        }
+        .removeButton {
+            appearance: none;
+            -webkit-appearance: none;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            z-index: 999;
+            font-size: 1rem;
+        }
+        &.placeholder {
+            margin-right: 8rem;
+        }
+    }
+
+}
+
+.listAttachments-btn-action-remove {display: none}
+.listAttachments-btn-action-remove i {pointer-events: none}
+.state-eoReply .listAttachments-btn-action-remove {display: block}

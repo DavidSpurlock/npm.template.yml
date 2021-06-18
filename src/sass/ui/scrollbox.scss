@@ -1,0 +1,59 @@
+.scrollbox-container {
+    position: relative;
+    z-index: 1;
+    max-height: 175px;
+    padding-right: 15px;
+
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    display: block;
+    clear: both;
+    border-top: 1px solid $border;
+    border-bottom: 1px solid $border;
+
+    background: #fff no-repeat;
+    background-image:
+        -webkit-radial-gradient(50% 0, farthest-side, $border, rgba(0,0,0,0)),
+        -webkit-radial-gradient(50% 100%,farthest-side, $border, rgba(0,0,0,0));
+    background-image:
+        -moz-radial-gradient(50% 0, farthest-side, $border, rgba(0,0,0,0)),
+        -moz-radial-gradient(50% 100%,farthest-side, $border, rgba(0,0,0,0));
+    background-image:
+        radial-gradient(farthest-side at 50% 0, $border, rgba(0,0,0,0)),
+        radial-gradient(farthest-side at 50% 100%, $border, rgba(0,0,0,0));
+    background-position: 50% 0, 0 100%;
+    background-size: calc(100% - 20px) 3px;
+
+    &:before,
+    &:after {
+        content: "";
+        position: relative;
+        z-index: -1;
+        display: block;
+        height: 15px;
+        margin: 0 -15px -15px -15px;
+        background: #fff;
+
+    }
+    &:after {
+        margin: -15px -15px 0 -15px;
+    }
+
+    .scrollbox-container-group,
+    .scrollbox-container-group-item {
+        display: block;
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        clear: both;
+        position: relative;
+    }
+
+    .scrollbox-container-group { padding: 10px 0px }
+
+    .scrollbox-container-group-item {
+        @include flexInline();
+        @include flexAlignCenter();
+        width: 100%;
+    }
+}

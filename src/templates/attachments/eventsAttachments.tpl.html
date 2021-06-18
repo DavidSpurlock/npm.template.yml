@@ -1,0 +1,54 @@
+<div class="eventsAttachments-container eventsAttachments-hidden">
+    <details class="eventsAttachments-details" ng-repeat="event in model.events track by event.uid">
+        <summary class="eventsAttachments-summary">
+            <i class="fa fa-calendar"></i>
+            <span class="eventsAttachments-placeholder" ng-if="!event.summary" translate-context="Info" translate>Attached Event</span>
+            <span ng-if="event.summary">
+                <strong>{{ event.summary }}</strong> /
+                {{ ::dateFormat(event) }}
+            </span>
+        </summary>
+        <div ng-if="event.summary" class="eventsAttachments-details-wrapper">
+            <table class="eventsAttachments-details-table">
+                <tr ng-if="event.summary">
+                    <th scope="row" translate translate-context="Info">Summary</th>
+                    <td>
+                        {{ ::event.summary }}
+                        <button class="pm_button link eventsAttachments-download-link" data-event-uid="{{event.uid}}">
+                            <i class="fa fa-download btnDownloadAttachments-icon-download"></i>
+                            <span translate translate-context="Action">Download</span>
+                        </button>
+                    </td>
+                </tr>
+                <tr ng-if="event.description">
+                    <th scope="row" translate translate-context="Info">Description</th>
+                    <td class="eventsAttachments-description" ng-bind="::event.description"></td>
+                </tr>
+                <tr>
+                    <th scope="row" translate translate-context="Info">When</th>
+                    <td>
+                        {{ ::dateFormat(event, true) }}
+                    </td>
+                </tr>
+                <tr ng-if="event.organizer">
+                    <th scope="row" translate translate-context="Info">Organizer</th>
+                    <td><attendee-item data-attendee="{{ ::event.organizer }}"></attendee-item></td>
+                </tr>
+                <tr ng-if="event.attendeesList.length">
+                    <th scope="row" translate translate-context="Info">Attendees</th>
+                    <td>
+                        <ul>
+                            <li ng-repeat="attendee in event.attendeesList track by $id(attendee)">
+                                <attendee-item data-attendee="{{ ::attendee }}"></attendee-item>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr ng-if="event.location">
+                    <th scope="row" translate translate-context="Info">Location</th>
+                    <td>{{ ::event.location }}</td>
+                </tr>
+            </table>
+        </div>
+    </details>
+</div>

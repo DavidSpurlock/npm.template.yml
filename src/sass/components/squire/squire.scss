@@ -1,0 +1,57 @@
+.squire-container {
+    position: relative;
+
+    &[data-editor-mode="text/plain"] .angular-squire-wrapper {
+        display: none !important;
+    }
+
+    &[data-editor-mode="text/html"] .plaintext-editor {
+        display: none !important;
+    }
+
+    &[data-type-content="signature"] .plaintext-editor {
+        display: none !important;
+    }
+}
+
+.squire-container:not(.squireEditor-loaded) .plaintext-editor {display: none}
+
+.squire-container:not(.editorDropzone-enter) .squire-dropzone {display: none}
+
+.squire-dropzone {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: calc(100% - 2em);
+    width: calc(100% - 2em);
+    background: white;
+    z-index: 2001;
+    border: 1rem solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.pm_invalid .angular-squire-wrapper {
+    border-color: $red !important;
+    border-width: 2rem;
+}
+
+.plaintext-editor {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    margin: 0;
+    resize: none;
+    border: none;
+    padding: 1rem 10px;
+    font-size: .9rem; /* Use browser default settigns */
+    font-family: monospace;
+}
+
+.editor-container {
+    position: relative;
+}
+

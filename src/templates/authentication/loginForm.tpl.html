@@ -1,0 +1,90 @@
+<form
+    method="post"
+    id="pm_login"
+    name="loginForm"
+    class="pm_panel pm_panel-login alt pm_form loginForm-container"
+    novalidate role="form"
+    autocomplete="on">
+    <div class="pm_panel-login__inner">
+
+    <img src="assets/img/logo.png" height="20" alt="ProtonMail" class="logo" />
+
+    <h4 class="text-center margin-bottom">
+        <i class="fa fa-user title-icon"></i> <span translate-context="Title" translate>User login</span>
+    </h4>
+
+    <div class="alert alert-danger" id="error521" ng-if="error">{{ error.message }}</div>
+
+    <label for="username" class="sr-only" translate-context="Label" translate>User login</label>
+    <input
+        autofocus
+        autocapitalize="off"
+        autocorrect="off"
+        type="text"
+        ng-model="username"
+        id="username"
+        name="username"
+        placeholder-translate-context="login form placeholder"
+        placeholder-translate="Username"
+        class="margin loginForm-input-username"
+        required="" />
+
+    <label for="password" class="sr-only" translate-context="Label" translate>Password</label>
+    <password
+        class="margin loginForm-input-password"
+        data-id="password"
+        data-name="password"
+        data-value="password"
+        data-form="loginForm"
+        placeholder-translate-context="login form placeholder"
+        placeholder-translate="Password"></password>
+
+    <div class="loginForm-actions">
+        <div class="loginForm-actions-column">
+
+            <button
+                id="login_btn"
+                type="submit"
+                ng-disabled="loading"
+                class="loginForm-actions-main pm_button primary primary-white pull-right loginForm-btn-submit disabled-if-network-activity"
+                translate-context="Action"
+                translate>Login</button>
+
+            <div class="text-left text-notransform loginForm-actions-help">
+                <span translate translate-context="Trouble logging in? Get help or try older version.">Trouble logging in? Get</span>
+                <button
+                    class="loginForm-btn-help "
+                    data-action="help"
+                    type="button"
+                    translate-comment="Action"
+                    translate-context="Trouble logging in? Get help or try older version."
+                    translate>help</button>
+
+                <span translate translate-context="Trouble logging in? Get help or try older version.">or try</span>
+
+                <a
+                    class="link loginForm-btn-oldversion"
+                    href="https://old.protonmail.com/login"
+                    target="_self"
+                    translate-comment="Action"
+                    translate-context="Trouble logging in? Get help or try older version."
+                    translate>older version</a>.
+            </div>
+
+            <div class="loginForm-actions-new-container">
+                <div class="loginForm-actions-new-title text-notransform h4 margin-top" translate-context="title" translate>New to ProtonMail?</div>
+
+                <div class="loginForm-actions-create-container margin-top">
+                    <link-website
+                        class="loginForm-link-signup-button loginForm-actions-right margin-bottom"
+                        data-link="signup"></link-website>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+<div class="pm_panel-bottom text-notransform"><span translate translate-context="Want to test the latest features? Log in on BETA">Want to test the latest features? Log in on</span> <a href="https://beta.protonmail.com/" translate translate-context="Want to test the latest features? Log in on BETA">BETA</a>.</div>
+</form>
+

@@ -1,0 +1,15 @@
+<div class="autocompleteEmailsItem-container">
+    <email-encryption-icon
+        data-email="email"
+        data-message="message"></email-encryption-icon>
+
+    <span class="autocompleteEmails-label" tabindex="0">
+        {{ email | labelAutocomplete:message }}
+    </span>
+    <button
+        class="autocompleteEmails-btn-remove fa fa-times"
+        type="button"
+        aria-label="Remove"
+        data-address="{{ email.Address }}">
+    </button>
+</div>

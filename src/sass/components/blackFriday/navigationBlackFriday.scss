@@ -1,0 +1,41 @@
+.navigationBlackFriday-button {
+    background: transparent;
+    border: none;
+}
+
+.navigationBlackFriday-icon,
+.navigationBlackFriday-icon::after  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navigationBlackFriday-icon { width: 100% }
+
+.navigationBlackFriday-icon::after {
+    content: url(assets('bf/icon-bf.svg'));
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+}
+
+// Red for all users
+.navigationBlackFriday--redDot .navigationBlackFriday-icon::before {
+    content: '';
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    background: #D32E26;
+    border-radius: 50%;
+    left: calc(50% + .5em);
+    top: .25em;
+}
+
+.appConfigBody-is-mobile {
+    .navigationBlackFriday {
+        position: relative;
+    }
+    .navigationBlackFriday-button {
+        margin-top: 5px;
+    }
+}

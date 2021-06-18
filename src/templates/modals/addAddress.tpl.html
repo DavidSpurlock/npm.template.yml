@@ -1,0 +1,63 @@
+<div class="pm_modal {{ctrl.class}}" role="dialog" style="display: block;">
+    <form class="modal-dialog" name="addressForm" ng-submit="ctrl.submit()" novalidate>
+        <button type="button" ng-click="ctrl.cancel()" aria-hidden="true" title-translate="Close" title-translate-context="Action" class="fa fa-times close"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" translate translate-context="Title">Create Address</h4>
+            </div>
+            <div class="modal-body pm_form">
+                <div class="pm_grid" ng-if="'secured.members' | includedByState">
+                    <div class="col-3-8">
+                        <span class="label" translate-context="Label" translate>User</span>
+                    </div>
+                    <div class="col-5-8">
+                        <strong class="label">{{ ctrl.members[0].Name }}</strong>
+                    </div>
+                </div>
+                <div class="pm_grid" ng-if="'secured.domains' | includedByState">
+                    <div class="col-3-8">
+                        <label translate-context="Label" translate>Choose the user who will own this address</label>
+                    </div>
+                    <div class="col-5-8">
+                        <div class="col-1-2">
+                            <span class="pm_select">
+                                <select ng-model="ctrl.member" ng-options="member.Name for member in ctrl.members"></select>
+                                <i class="fa fa-angle-down"></i>
+                            </span>
+                        </div>
+                        <div class="col-1-2" ng-show="ctrl.showAddMember">
+                            <button type="button" ng-click="ctrl.addMember()" class="pm_button" translate-context="Action" translate-comment="button" translate>Add user</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pm_grid">
+                    <div class="col-3-8">
+                        <label translate-context="Label" translate>Enter address</label>
+                    </div>
+                    <div class="col-5-8">
+                        <div class="col-1-2">
+                            <input autofocus type="text" ng-model="ctrl.address" placeholder-translate-context="Example user" placeholder-translate="thomas.anderson" required />
+                        </div>
+                        <div class="col-1-2" ng-show="ctrl.domains.length === 1">
+                            <label class="bold"><span class="ellipsis" title="@{{ ctrl.domain.DomainName }}">@{{ ctrl.domain.DomainName }}</span></label>
+                        </div>
+                        <div class="col-1-2" ng-show="ctrl.domains.length > 1">
+                            <span class="pm_select">
+                                <select ng-model="ctrl.domain" ng-options="'@'+domain.DomainName for domain in ctrl.domains"></select>
+                                <i class="fa fa-angle-down"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <p ng-hide="ctrl.domain.ID" class="alert alert-info" translate translate-context="Info">ProtonMail addresses can never be deleted (only disabled). ProtonMail addresses will always count towards your address limit whether enabled or not. <a href="https://protonmail.com/support/knowledge-base/addresses-and-aliases/" target="_blank">Learn more</a></p>
+                <h3 translate-context="Title in the address modal" translate>Name / Signature</h3>
+                <display-name-signature data-model="ctrl.model"></display-name-signature>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="pm_button modal-footer-button disabled-if-network-activity" ng-click="ctrl.cancel()" translate translate-context="Action">Cancel</button>
+            <button class="pm_button primary modal-footer-button disabled-if-network-activity" translate translate-context="Action">Save</button>
+        </div>
+    </form>
+    <div class="modal-overlay"></div>
+</div>

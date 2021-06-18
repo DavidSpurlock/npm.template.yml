@@ -1,0 +1,89 @@
+.pm_panel {
+	width: $panel;
+	margin: auto;
+	color: $white;
+	padding: 50px;
+	max-width: 100%;
+	&.alt {
+        position: relative;
+        background: rgba(255,255,255,.3);
+        border: 0;
+        border-radius: $border-radius-large;
+		margin-top: 8rem;
+		margin-bottom: 2rem;
+		padding: 50px 44px 0 44px;
+		min-height: 350px;
+        a { color: $white }
+        &.pm_panel--twofactors {
+            background: rgba(0,0,0,.1);
+        }
+	}
+	&.wide {
+		width: ($panel * 1.5);
+	}
+
+
+    &-login.alt {
+        background: transparent;
+        padding: 0;
+    }
+
+    &-login__inner {
+        background: rgba(255,255,255,.3);
+        padding: 50px 44px 0 44px;
+        border: 1px solid $primary;
+        border-radius: $border-radius-large;
+    }
+
+    &-bottom {
+        padding: 1em 44px;
+        background: transparent;
+    }
+}
+
+body.light {
+	.pm_panel {
+		background: $white;
+		color: $default-color;
+	}
+}
+
+body.appConfigBody-is-mobile {
+	.pm_panel {
+        width: auto;
+        max-width: $panel;
+		padding: 15px 20px;
+        margin-top: 2rem;
+
+        &-bottom {
+           margin-left: 0;
+           margin-right: 0;
+           padding-left: 20px;
+           padding-right: 20px;
+           text-align: center;
+        }
+        &.alt,
+        &-login__inner {
+            background: transparent;
+            border: 0;
+        }
+        &-login__inner,
+        &-twofactors,
+        &-outsideunlock {
+            padding-left: 20px !important;
+            padding-right: 20px !important;
+        }
+    }
+    .loginForm-actions-help {
+        text-align: center;
+    }
+}
+
+
+#support-reset-password,
+#support-message {
+	.wrap {
+		max-width: $panel;
+		margin: 2rem auto;
+	}
+}

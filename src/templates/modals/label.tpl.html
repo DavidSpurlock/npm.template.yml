@@ -1,0 +1,82 @@
+<section
+    class="pm_modal small important {{ctrl.class}} labelModal-container"
+    role="dialog"
+    id="labelModal">
+
+    <form
+        class="modal-dialog labelModal-form"
+        name="editLabelForm"
+        ng-submit="ctrl.create(editLabelForm)">
+
+        <button
+            ng-click="ctrl.cancel()"
+            type="button"
+            aria-hidden="true"
+            title-translate="Close"
+            title-translate-context="Action"
+            class="fa fa-times close"></button>
+
+        <div class="modal-content">
+
+            <header class="modal-header" ng-show="ctrl.title">
+                <h3 class="modal-title">{{ ::ctrl.title }}</h3>
+            </header>
+
+            <div class="modal-body pm_form pm_grid">
+                <div class="row">
+                    <label for="labelName" class="col-1-4" translate translate-context="Label">Name</label>
+                    <div class="col-3-4 ng-message-wrapper">
+                        <input
+                            type="text"
+                            class="form-control labelModal-input-name"
+                            autofocus
+                            id="labelName"
+                            name="label"
+                            data-valid-label
+                            ng-model="ctrl.name"
+                            placeholder-translate-context="Placeholder"
+                            placeholder-translate="Name"
+                            required>
+
+                        <div
+                            ng-messages="editLabelForm.label.$error"
+                            role="alert"
+                            class="text-red labelModal-errors">
+                            <p ng-message="required" translate-context="Error" translate>You must set a name</p>
+                            <p ng-message="validLabel">
+                                <span translate-context="Error" translate>Invalid name. Forbidden char. ex:</span>
+                                &#60;&#62;
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-1-4" translate translate-context="Label">Color</label>
+                    <div class="col-3-4">
+                        <label-color-selector data-color="ctrl.color"></label-color-selector>
+                    </div>
+                </div>
+
+                <div class="row" ng-if="ctrl.ID && ctrl.exclusive">
+                    <label for="labelNotify" class="col-1-4" translate translate-context="Title" translate-comment="Desktop notification">Notification</label>
+                    <div class="col-3-4">
+                        <toggle status="ctrl.notify" id="labelNotify" data-id="labelNotify"></toggle>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="modal-footer">
+            <button
+                class="pm_button labelModal-btn-cancel modal-footer-button disabled-if-network-activity"
+                type="reset"
+                ng-click="ctrl.cancel()"
+                translate
+                translate-context="Action">Cancel</button>
+            <button
+                class="pm_button primary modal-footer-button labelModal-btn-save disabled-if-network-activity"
+                translate
+                translate-context="Action">Save</button>
+        </footer>
+    </form>
+    <div class="modal-overlay"></div>
+</section>

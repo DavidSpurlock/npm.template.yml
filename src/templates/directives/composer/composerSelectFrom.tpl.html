@@ -1,0 +1,15 @@
+<div class="composerSelectFrom-container">
+  <label
+    translate
+    translate-context="Title"
+    for="fromMessage{{::message.ID}}">From</label>
+  <select
+    class="flex"
+    id="fromMessage{{::message.ID}}"
+    name="fromMessage{{::message.ID}}"
+    ng-model="message.From"
+    ng-options="address.Email for address in addresses track by address.Email"></select>
+  <button class="pm_button link" >
+      <i class="fa fa-angle-down"></i>
+  </button>
+</div>

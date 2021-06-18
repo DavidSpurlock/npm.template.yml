@@ -1,0 +1,60 @@
+.navigation {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    margin: 0 10px 0 0;
+    padding: 0;
+    height: 100%;
+}
+
+.navigation > li {
+    position: relative;
+    display: flex;
+    flex: 0 0 115px;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    border-top: 5px solid transparent;
+    transition: border .15s ease-in-out;
+}
+
+.navigation > li.active,
+.navigation > li:hover { border-color: $primary }
+
+.navigation-link {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    height: 100%;
+    color: inherit;
+    opacity: .9;
+}
+
+.navigation-icons, .navigation-icon {
+    display: inline-flex;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    font-size: 15px;
+
+    .fa-angle-down {
+        font-size: 13px;
+        margin-left: 2px;
+    }
+}
+
+.navigation-title {
+    line-height: 20px;
+    font-weight: normal;
+    text-transform: uppercase;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 115px;
+}
+
+.navigationBlackFriday:not(.navigationBlackFriday-is-black-friday) { display: none }

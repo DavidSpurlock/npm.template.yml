@@ -1,0 +1,27 @@
+<div class="public-key-found-container"
+    ng-class="{ 'messageExtra-container-warning': message.verified > 1 }">
+    <div class="public-key-found-notice">
+        <span
+            class="public-key-found-notice-text"
+            ng-if="message.verified < 2 && !message.isInternal()"
+            translate-context="Info"
+            translate>An unknown public key has been detected for this recipient.</span>
+        <span
+            class="public-key-found-notice-text"
+            ng-if="message.isInternal() || message.verified > 1"
+            translate-context="Info"
+            translate>This message is signed by a public key that has not been trusted yet.
+        </span>
+        <a
+            class="public-key-found-notice-link"
+            href="https://protonmail.com/support/knowledge-base/how-to-use-pgp/"
+            target="_blank"
+            translate-context="Action"
+            translate>Learn more</a>
+    </div>
+    <button
+        type="button"
+        class="public-key-found-button pm_button"
+        translate-context="Action"
+        translate>TRUST KEY</button>
+</div>

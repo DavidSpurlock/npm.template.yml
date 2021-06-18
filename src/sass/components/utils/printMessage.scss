@@ -1,0 +1,38 @@
+.printMessage-plain-content {
+    font-family: monospace;
+    white-space: pre-wrap;
+}
+
+.printMessage-container .listAttachments-header {
+    display: none;
+}
+
+.printMessage-container .listAttachments-list {
+    margin-top: 1rem;
+}
+
+/* suggest not to split inside attachment area */
+.printMessage-container .listAttachments-container {
+    page-break-inside: avoid;
+    margin-top: 1rem;
+}
+
+/* fix attachments text cropped and remove double-border */
+.printMessage-container .listAttachments-list .listAttachments-att .name {
+    height: auto;
+    line-height: auto;
+}
+
+/* Hide toggle blockquote button */
+.printMessage-container .proton-message-blockquote-toggle {
+    display: none;
+}
+
+/* Show all blockquotes */
+.printMessage-container .proton-message-blockquote-toggle ~ * {
+    display: block !important;
+}
+
+.printMessage-container .listAttachments-title-size,
+.printMessage-container .listAttachments-title-download { display: none }
+.printMessage-container .listAttachments-container a { pointer-events: none }

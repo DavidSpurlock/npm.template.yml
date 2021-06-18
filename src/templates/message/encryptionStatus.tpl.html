@@ -1,0 +1,43 @@
+<div class="encryptionStatus-container">
+    <a
+        class="fa locks fa-lock"
+        href="https://protonmail.com/support/knowledge-base/what-is-encrypted/"
+        target="_blank"
+        ng-if="!displaySignatureStatus() && !message.isPGPEncrypted()"
+        ng-class="{
+            'text-purple': message.isInternal() || message.isSentEncrypted() || message.isDraft() || message.isAuto(),
+        }">
+    </a>
+
+    <a
+        class="fa locks fa-lock pgp"
+        href="https://protonmail.com/support/knowledge-base/how-to-use-pgp"
+        target="_blank"
+        ng-if="!displaySignatureStatus() && message.isPGPEncrypted()">
+    </a>
+
+    <a
+        href="https://protonmail.com/support/knowledge-base/digital-signature/"
+        target="_blank"
+        ng-if="displaySignatureStatus()">
+        <svg
+            class="signed-lock"
+            width="18"
+            viewBox="0 0 374.8 337.1"
+            ng-class="{
+                'valid-sig': message.verified === 1,
+                'invalid-sig': message.verified !== 1,
+                'internal': message.isInternal() || message.isSentEncrypted() || message.isDraft() || message.isAuto(),
+                'pgp': message.isPGPEncrypted(),
+            }">
+            <use
+                ng-if="message.verified === 1"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                xlink:href="#svg-lock-signed"></use>
+            <use
+                ng-if="message.verified !== 1"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                xlink:href="#svg-lock-warning"></use>
+        </svg>
+    </a>
+</div>

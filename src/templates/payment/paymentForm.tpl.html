@@ -1,0 +1,97 @@
+<div class="pm_form paymentForm-container" ng-class="{
+    'paymentForm-cycle-month': ctrl.valid.Cycle === 1,
+    'paymentForm-cycle-year': ctrl.valid.Cycle === 12,
+    'paymentForm-cycle-2-years': ctrl.valid.Cycle === 24,
+}">
+    <div class="pm_grid">
+        <div class="col-1-2">
+            <div class="pm_table">
+                <payment-plan-overview
+                    plan-ids="ctrl.planIDs"
+                    valid="ctrl.valid"
+                    class="margin"></payment-plan-overview>
+            </div>
+
+            <div class="text-center alert alert-info paymentForm-about-month">
+                <p>
+                    <strong translate-context="Payment form information" translate>Save 20% with the annual plan!</strong>
+                </p>
+                <p>
+                    <button type="button" class="pm_button primary paymentForm-btn-payAnnualy" translate translate-context="Action">Pay annually</button>
+                </p>
+            </div>
+
+        </div>
+
+        <div class="col-1-2">
+            <p class="alert alert-danger" ng-show="!ctrl.status.Paypal" translate translate-context="Info">PayPal is currently not available, please try again later.</p>
+            <p class="alert alert-danger" ng-show="!ctrl.status.Stripe && !ctrl.status.Paymentwall" translate translate-context="Info">Credit card payment is currently not available, please try again later.</p>
+
+            <div ng-if="ctrl.valid.AmountDue">
+
+                <div class="pm_grid margin">
+                    <div class="col-1-2">
+                        <label for="paymentMethod" translate translate-context="Title" translate-comment="form label">Payment method:</label>
+                    </div>
+                    <div class="col-1-2">
+                        <div class="pm_select">
+                            <select
+                                id="paymentMethod"
+                                ng-model="ctrl.method"
+                                ng-options="method.label for method in ctrl.methods"></select>
+                            <i class="fa fa-angle-down"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <card-view
+                    data-card="ctrl.card"
+                    ng-if="ctrl.method.value === 'card'"
+                    data-form="form"></card-view>
+
+                <div ng-if="ctrl.method.value === 'paypal'">
+
+                    <paypal-view
+                        data-amount="ctrl.valid.AmountDue"
+                        data-currency="ctrl.valid.Currency"
+                        data-callback="ctrl.paypalCallback"></paypal-view>
+                </div>
+
+                <bitcoin-view
+                    ng-if="ctrl.method.value === 'bitcoin'"
+                    class="paymentModal-bitcoin"
+                    data-currency="ctrl.valid.Currency"
+                    data-amount="ctrl.valid.AmountDue"></bitcoin-view>
+
+                <p
+                    ng-if="ctrl.method.value === 'cash'"
+                    class="alert alert-info"
+                    translate
+                    translate-context="Info">To pay via Cash, please email us at <strong>contact@protonmail.com</strong> for instructions.</p>
+
+                <hr />
+
+            </div>
+
+            <div ng-if="!ctrl.isBlackFriday">
+                <p>
+                    <gift-code-btn ng-if="!ctrl.displayGift" ng-click="ctrl.displayGift = true"></gift-code-btn>
+                </p>
+
+                <div ng-if="ctrl.displayGift">
+                    <label translate-context="Context" translate>Gift code</label>
+                    <div class="pm_grid flex flex-row">
+                        <div class="col-2-3">
+                            <gift-code-input data-code="ctrl.gift" data-form="form"></gift-code-input>
+                        </div>
+                        <div class="col-1-3">
+                            <button type="button" data-action="gift" class="pm_button primary" translate-context="Action" translate>Apply</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p><span translate translate-context="Info">By clicking Submit, you agree to abide by</span> <a href="https://protonmail.com/terms-and-conditions" target="_blank" translate translate-context="Link">ProtonMail's Terms and Conditions</a>.</p>
+        </div>
+    </div>
+</div>

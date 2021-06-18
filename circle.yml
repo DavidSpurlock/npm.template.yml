@@ -1,0 +1,22 @@
+version: 2
+jobs:
+   build:
+     docker:
+       - image: circleci/node:12.4.0-stretch-browsers
+     steps:
+       - run: sudo apt-get install -y gawk
+       - checkout
+       - restore_cache:
+           key: npm-deps-{{ checksum "package.json" }}-{{ checksum "tasks/lazyInstallVendor" }}
+       - run: npm i --no-audit
+       - run: ./tasks/lazyInstallVendor test
+       - save_cache:
+           key: npm-deps-{{ checksum "package.json" }}-{{ checksum "tasks/lazyInstallVendor" }}
+           paths:
+             - node_modules
+       - run: npm run config
+       - run: ./tasks/checkInjector.sh --lint
+       - run: npm run lint
+       - run: npm run i18n:extract
+       - run: npm run i18n:check -- --debug
+       - run: npm test

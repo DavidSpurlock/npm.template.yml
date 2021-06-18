@@ -1,0 +1,41 @@
+.alert {
+	padding: 15px 20px;
+	border-radius: $border-radius-large;
+	background: $alert;
+	color: darken($alert, 50);
+	a {
+		font-weight: 500;
+		color: $black;
+	}
+	&.alert-info {
+		background: $primary-light;
+		color: darken($primary-light, 50);
+	}
+    &.alert-success {
+        background: $green;
+		color: darken($green, 50);
+    }
+    &.alert-danger {
+        background: $danger;
+		color: darken($danger, 50);
+    }
+    &.alert-warning {
+        background: $warning;
+		color: darken($warning, 50);
+    }
+	&.alert-flex {
+		align-items: center;
+		display: flex;
+		justify-content: space-between;
+	}
+
+    input[type="text"],
+    input[type="number"],
+    input[type="password"],
+    input[type="email"],
+    input[type="search"],
+    textarea,
+    .pm_select {
+        background: $white !important;
+    }
+}

@@ -1,0 +1,25 @@
+[class*="contactGroupModal-td"] {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.contactGroupModal-td-email {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.contactGroupModal-btn-remove {
+    color: $primary;
+    border: 0;
+    background: transparent;
+    padding: 0 1rem
+}
+.contactGroupModal-btn-remove:focus,
+.contactGroupModal-btn-remove:hover { color: $default-color }
+
+.contactGroupModal-addContact {
+    position: relative;
+}
+
+.contactGroupModal-contacts { width: 100% }

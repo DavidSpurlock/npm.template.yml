@@ -1,0 +1,66 @@
+<div class="composerInputMeta-container"
+     ng-class="{'composerInputMeta-recipients': containsRecipient(), 'composerInputMeta-overlay-hidden': message.ccbcc  || message.autocompletesFocussed || containsInvalid(message) }">
+
+    <div class="composerInputMeta-overlay">
+        <label
+            class="composerInputMeta-overlay-label"
+            translate-context="Title"
+            translate>Recipients</label>
+        <div class="composerInputMeta-overlay-list">
+            <span class="svg-ellipsis-clipper"></span>
+            <span
+                ng-if="message.ToList.length"
+                translate-context="Title"
+                translate-comment="To: addresses"
+                translate>To:</span>
+            <composer-input-recipient
+                ng-repeat="email in message.ToList track by email.Address"
+                data-email="email"
+                data-message="message"></composer-input-recipient>
+            <span
+                ng-if="message.CCList.length"
+                translate-context="Title"
+                translate-comment="CC: addresses"
+                translate>CC:</span>
+            <composer-input-recipient
+                ng-repeat="email in message.CCList track by email.Address"
+                data-email="email"
+                data-message="message"></composer-input-recipient>
+            <span
+                ng-if="message.BCCList.length"
+                translate-context="Title"
+                translate-comment="BCC: addresses"
+                translate>BCC:</span>
+            <composer-input-recipient
+                ng-repeat="email in message.BCCList track by email.Address"
+                data-email="email"
+                data-message="message"></composer-input-recipient>
+        </div>
+    </div>
+
+    <label
+        to="composerAutocompleteTo"
+        class="composerInputMeta-label"
+        data-action="openModal"
+        pt-tooltip-translate="Add contacts"
+        pt-tooltip-translate-context="Action"
+        translate
+        translate-context="Title">To</label>
+    <autocomplete-emails
+        class="composerInputMeta-autocomplete"
+        data-name="composerAutocompleteTo"
+        data-message="message"
+        data-emails="message.ToList"
+        data-key="ToList"></autocomplete-emails>
+
+    <button
+        class="pm_button link composerInputMeta-overlay-button"
+        ng-class="{'fa-rotate-180': message.ccbcc}"
+        tabindex="-1"
+        pt-tooltip-translate="CC BCC"
+        pt-placement="left"
+        pt-tooltip-translate-context="Action">
+        <i class="fa fa-angle-down"></i>
+        <span class="sr-only" translate-context="Action" translate>CC BCC</span>
+    </button>
+</div>

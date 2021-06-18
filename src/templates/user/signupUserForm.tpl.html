@@ -1,0 +1,56 @@
+<div class="signupUserForm-container">
+
+
+    <div class="text-center header">
+        <div>
+            <img class="signupUserForm-header-logo" src="/assets/img/logo/logo-purple.svg" height="34" />
+        </div>
+        <h2 class="signupUserForm-header-title">
+            <i class="fa fa-user"></i>
+            <span translate translate-context="Title">Create your account</span>
+        </h2>
+    </div>
+
+    <form
+        method="post"
+        name="accountForm"
+        novalidate
+        class="pm_form">
+
+        <div class="wrapper margin">
+
+            <p class="alert alert-info" translate-context="Info" translate>Take back your privacy! Creating your secure email account takes less than 2 minutes.</p>
+
+            <username-domain
+                data-step="1"
+                data-domains="domains"
+                data-form="accountForm"
+                data-model="account"></username-domain>
+
+            <input type="text" name="username" autocomplete="off" class="hidden">
+
+            <username-password
+                data-step="2"
+                data-form="accountForm"
+                data-model="account.login"></username-password>
+        </div>
+
+        <div class="wrapper margin">
+            <section class="notificationEmail-container" data-step="3">
+                <label class="titleLabel" for="notificationEmail">
+                    <span translate translate-context="Title">Recovery email (optional)</span>
+                </label>
+
+                <p class="help" translate-context="Info" translate>This is used to recover your account if you get locked out or forget your password.</p>
+
+                <signup-iframe data-mode="bottom"></signup-iframe>
+
+            </section>
+
+        </div>
+
+        <!-- Hidden to trigger form validation when we submit from password input -->
+        <button class="hidden" translate-context="Action" translate>Submit</button>
+    </form>
+
+</div>

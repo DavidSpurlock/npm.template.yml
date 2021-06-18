@@ -1,0 +1,702 @@
+.messageView-contaniner {
+    @include flexColumn();
+}
+
+
+@keyframes nodeInserted {
+    from { opacity: 0.99; }
+    to { opacity: 1; }
+}
+
+.clipboardInput {
+    position: absolute;
+    height: 0;
+    font-size: 0;
+    border: 0;
+    padding: 0;
+}
+
+.details .contact .message-address-action-button {
+    padding-left: 6px;
+}
+
+#conversation-view {
+    .fa-star {
+        color: $yellow-star;
+    }
+    header {
+
+        display:-webkit-flex;
+        display: flex;
+
+        -webkit-flex-direction:column;
+        flex-direction: column;
+
+        -webkit-backface-visibility: hidden; /* fix safari issue on containsMessage not diplayed properly */
+
+        /*
+        Supercalifragilisticexpialidocious h1
+        avoid child shrink which is accomplished here by min-content
+        */
+        min-height: -moz-min-content;
+        min-height: -webkit-min-content;
+        min-height: min-content;
+        border-bottom: 1px solid $border;
+        padding: 0px 10px;
+
+        h1 {
+            position: relative;
+            font-size: 24px;
+            font-weight: 400;
+            color: set-invert-color($main-background,$black);
+            line-height: 35px;
+            margin: 0;
+            letter-spacing: .04rem;
+            display: inline-block;
+            word-wrap: break-word;
+            padding: 0 10px;
+            padding: 14px 30px 14px 0px; /* star */
+            min-height: 35px;
+            max-height: 110px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            border-left: 1px solid transparent;
+
+            .starButton {
+                position: absolute;
+                right: -10px;
+                top: 14px;
+                border: none;
+                margin-right: 0;
+                box-shadow: none;
+                a {
+                    background: transparent !important;
+                    line-height: 33px;
+                    height: 33px;
+                    padding: 0 10px;
+                    display: block;
+                    font-size: 1.5rem;
+                    box-shadow: none;
+                    border: 0;
+                }
+            }
+        }
+        .containsMessage {
+            p {
+                margin: 0px 0px 13px 0px;
+            }
+        }
+    }
+    .message {
+        border: 1px solid $border;
+        border-radius: 2px;
+        margin: 10px;
+        clear: both;
+
+        .recipients-details .messageContacts-email { margin-left: .5em; }
+
+        &:not(.open) {
+            .message-frame,
+            .recipients-details-bccGroup,
+            .message-contact-sender,
+            .recipients-details-ccGroup { display: none !important }
+
+            .summary { overflow: hidden }
+        }
+
+        &:not(.details) {
+            .time-readable,
+            .recipients-details,
+            .toggleDetails-label-hide { display: none !important }
+        }
+
+        &.details {
+            .time-machine,
+            .recipients-summary,
+            .message-summary-folder,
+            .toggleDetails-label-show,
+            .message-summary-labels { display: none !important }
+        }
+
+        &:not(.hasSender) .message-contact {display: none}
+
+        .summary,
+        .details {
+            float: left;
+            width: 100%;
+            clear: both;
+        }
+        .message-contact-sender { color: $primary }
+        &.marked {
+            .summary, .details {
+                box-shadow: inset 5px 0 0 $primary;
+            }
+        }
+        &.open {
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            .summary {
+                .meta {
+                    .contact {
+                        strong {
+                            font-weight: 700;
+                        }
+                    }
+                }
+            }
+        }
+        &.details.open {
+            .summary {
+                height: 50px;
+                .meta {
+
+                    .history {
+                        float: left;
+                        margin: 0 .5rem 0 0;
+                        display: inline-block;
+                        height: 40px;
+                        line-height: 40px;
+                    }
+                    .contact {
+                        div.from {
+                            text-align: left;
+                        }
+                        em {
+                            display:-webkit-flex;
+                            display: flex;
+                            position: absolute;
+                            bottom:5px;
+                            line-height: 20px;
+                            height: 1rem;
+
+                            a {
+                                line-height: 20px;
+                                padding: 0px 3px;
+                                display: inline-block;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &.unread:not(.open) .summary {
+            background: $white;
+            .meta .contact strong {
+                font-weight: 700;
+            }
+            .time,
+            .status,
+            .labels,
+            .location.folders,
+            .summary-right {
+                background: $white !important;
+            }
+            .time::after {
+                background: linear-gradient(to right,  rgba($white,0) 0%, $white 100%);
+            }
+        }
+        .summary {
+            display: flex;
+            height: 40px;
+            line-height: 40px;
+            background: $tertiary;
+            border-radius: $border-radius;
+            padding: 0 10px;
+            text-align: right;
+            font-size: .9em;
+            cursor: pointer;
+            position: relative;
+            span i.fa {
+                margin-left: .5rem;
+            }
+            span .signature-status i.fa {
+                margin: 0;
+            }
+            .signature-status {
+                color: $primary;
+                .fa-warning::before {
+                    background: radial-gradient(circle at 50% 55%, white, white 35%, transparent 36%, transparent);
+                }
+                .no-keys {
+                    color: orange;
+                }
+                .invalid-sig {
+                    color: indianred;
+                }
+            }
+            .summary-left {
+                display: flex;
+                flex: 1;
+                overflow: hidden;
+
+                .meta {
+                    display: flex;
+                    flex: 1;
+                    overflow: hidden;
+                    .history {
+                        display: block;
+                        flex-shrink: 0;
+                        padding-right: 0.25em;
+                        line-height: 40px;
+                    }
+                }
+                .location.sent {
+                    flex: initial;
+                }
+                .location.sent {
+                    padding-left: 6px;
+
+                    .fa-folder {
+                        display: none;
+                    }
+                }
+            }
+            .summary-right {
+                flex: initial;
+                background: $tertiary;
+                display: inline-block;
+                z-index:2;
+            }
+            .message-attachments {
+                margin-left: .45rem;
+            }
+            .labels,
+            .time,
+            .status,
+            .location.folders,
+            .message-attachments {
+                display: inline-block;
+                position: relative;
+                z-index: 2;
+                background: $tertiary;
+            }
+            .location.folders .pm_tag {
+                display: none;
+            }
+            .time {
+                position: relative;
+                z-index: 2;
+            }
+            .meta {
+                white-space: nowrap; /* single line for long from */
+                .contact {
+                    display: flex;
+                    align-items: baseline;
+                    min-width: 0; // to allow the contact box to shrink
+                    strong {
+                        font-weight: normal;
+                    }
+                    span {
+                        color: $default-color-medium;
+                    }
+                }
+            }
+            .location {
+                .loc {
+                    color: rgba(0,0,0,.5);
+                    margin-left: .25rem;
+                }
+            }
+
+            .encryptionStatus {
+                padding-left: 0.25em;
+
+                .fa {
+                    color: $default-color-medium;
+                    display: inline-block;
+                    text-align: right;
+                    width: 1rem;
+                    font-size: 16px;
+                    margin-left: -3px;
+                    margin-right: 4px;
+                    &.pgp {
+                        color: $pgp;
+                    }
+                }
+                a {
+                    text-decoration: none;
+                }
+                svg {
+                    // Make click events trigger on the parent <a> so that it doesn't toggle the message
+                    pointer-events: none;
+                }
+                .signed-lock {
+                    fill: $default-color-medium;
+                    display: inline-block;
+                    height: 15px;
+                    margin-left: 2px;
+                    margin-right: -1px;
+                    margin-bottom: -1px;
+                    // correct for the checkmark so that the lock is on the same place as the fa-lock
+
+                    &.valid-sig {
+                        // darken the checkmark for more contrast
+                        color: $pgp; // signed with pgp but not encrypted with pgp
+
+                        &.internal {
+                            color: darken($primary, 10);
+                        }
+
+                        &.pgp {
+                            color: darken($pgp, 10);
+                        }
+                    }
+
+                    &.internal {
+                        fill: $primary;
+                    }
+
+                    &.pgp {
+                        fill: $pgp;
+                    }
+
+                    &.invalid-sig {
+                        color: indianred;
+                    }
+
+                    &.no-keys {
+                        color: orange;
+                    }
+                }
+            }
+
+            .from-value {
+                display: inline-block;
+                overflow-y: hidden;
+                overflow-x: hidden;
+                text-overflow: ellipsis;
+                vertical-align: middle;
+                text-align: left;
+                padding-left: 0.25em; // width of a space
+            }
+        }
+        .details {
+            border-bottom: 1px solid $border;
+            background: $tertiary;
+            padding: 0 10px 10px;
+            clear: both;
+            .pull-right .pm_buttons {
+                margin: 0 0 0 4px;
+            }
+            .pm_buttons {
+                a {
+                    background: $white;
+                    border-right: 0;
+                    border-radius: 0;
+                }
+                .pm_buttons:first-of-type a,
+                & > .dropdown-actions-nowrap-reply {
+                    border-radius: 2px 0 0 2px;
+                }
+                .pm_buttons:last-of-type a,
+                & > .dropdown-actions-nowrap-more {
+                    border-radius: 0 2px 2px 0;
+                    border-right: 1px solid $border;
+                }
+            }
+            .recipients-details {
+                font-size: .9em;
+                line-height: 20px;
+                width: 100%;
+            }
+            .recipients-summary {
+                display: block;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                line-height: 20px;
+
+                .recipients-summary-label + .recipients-summary-label::before {
+                        content: ', ';
+                }
+
+                strong {
+                    display: inline-block;
+                    color: $default-color-medium;
+                    font-weight: normal;
+                    display: inline-block;
+                }
+                font-size: .9em;
+                .from {
+                    width: 3rem;
+                    color: $default-color-medium;
+                }
+            }
+            .action-row {
+                padding: 10px 0;
+                clear: both;
+                float: left;
+                width: 100%;
+            }
+        }
+        .toggleDetails {
+            color: $primary;
+            cursor: pointer;
+            height: 35px;
+            line-height: 35px; // height of the buttons on the same line
+            display: inline-block;
+            font-size: .9em;
+            border: 0;
+            background: transparent;
+        }
+        .frame {
+            padding: 15px 30px;
+            zoom: 1;
+            clear: left;
+            overflow-x: auto;
+            box-sizing: content-box; // to avoid problems in some emails
+
+            .bodyDecrypted { word-wrap: break-word; }
+
+            .email {
+                position: relative;
+                .pm_button.more {
+                    line-height: 1rem;
+                    height: 1rem;
+                    background: $tertiary;
+                    margin-top: 1rem;
+                    margin-bottom: 1rem;
+                    display: block;
+                }
+                blockquote.protonmail_quote {
+                    position: relative
+                }
+            }
+        }
+
+        .bodyDecrypted {
+            will-change: transform;
+            animation: nodeInserted;
+            animation-duration: 0.001s;
+        }
+    }
+}
+
+.bodyDecrypted {
+    /* Forbidden property on almost ALL clients IE add a space :) */
+    [style*="position:absolute"],
+    [style*="position: absolute"] {
+        position: relative !important;
+    }
+}
+
+.bodyDecrypted.plain {
+    white-space: pre-wrap;
+    font-family: monospace;
+}
+
+.bodyDecrypted pre code {
+    white-space: pre-wrap;
+    background-color: transparent;
+}
+
+.message:not(.message-is-replied):not(.message-is-repliedall):not(.message-is-forwarded) [data-if-is],
+.message.message-is-replied [data-if-is]:not([data-if-is="replied"]),
+.message.message-is-repliedall [data-if-is]:not([data-if-is="repliedall"]),
+.message.message-is-forwarded [data-if-is]:not([data-if-is="forwarded"]) {
+    display: none !important;
+}
+
+#conversation-view:empty,
+.message.message-mode-plain .displayContentBtn-container { display: none }
+
+.protonmail_signature_block-empty { /* https://github.com/ProtonMail/Angular/issues/4813 */
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+// Replicated in squireEditor.js
+// Handle outlook https://github.com/ProtonMail/Angular/issues/6711
+p.MsoNormal, li.MsoNormal, div.MsoNormal {
+    margin: 0;
+}
+
+// MOBILE
+body.appConfigBody-is-mobile {
+    #conversation-view .message .from {
+            display: none;
+    }
+}
+@media (max-width: 1350px) {
+    #conversation-view {
+        .message {
+            .summary {
+                height: 60px;
+                position: relative;
+                .summary-right {
+                    position: initial;
+                    line-height: 25px;
+                    min-width: 175px;
+                }
+                .summary-left {
+                    line-height: 35px;
+                    .meta .history {
+                        line-height: 35px;
+                    }
+                }
+                .location {
+                    &.folders {
+                        position: absolute;
+                        left: 20px;
+                        bottom: 5px;
+                        z-index: 5;
+                        .pm_tag {
+                            display: inline-block;
+                            margin: 0;
+                        }
+                    }
+                    &.sent {
+                        display: none;
+                    }
+                }
+                .labels {
+                    position: absolute;
+                    right: 23px;
+                    bottom: 5px;
+                    z-index: 5;
+                }
+                .time {
+                    position: absolute;
+                    right: 23px;
+                    top: 5px;
+                    background: $tertiary;
+                    max-width: 45%;
+                    min-width: 150px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    span {
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: inline-block;
+                        float: right;
+                        width: 100%;
+                    }
+                }
+                .status {
+                    position: absolute;
+                    right: 6px;
+                    top: 5px;
+                    .fa {
+                        display: inline-block;
+                        text-align: right;
+                        width: 1rem;
+                    }
+                    .signed-lock {
+                        width: 17px;
+                        height: 17px;
+                    }
+                }
+            }
+            & > div.details {
+                & > .recipients-summary {
+                    position: relative;
+                    top: -27px;
+                    max-width: 85%;
+                }
+                .contact {
+                    em {
+                        display: block;
+                        padding-bottom: .5rem;
+                    }
+                }
+            }
+            &.details {
+                .summary {
+                    margin-bottom: 0;
+                    .meta {
+                        position: static;
+                        left: initial;
+                        top: initial;
+                        .contact {
+                            strong {
+                                position: absolute;
+                                left: 10px;
+                                top: 5px;
+                            }
+                            em {
+                                position: absolute;
+                                left: 10px;
+                                bottom: 10px;
+                                color: $default-color-medium;
+                            }
+                        }
+                    }
+                }
+                &.open .summary {
+                    .meta {
+                        margin-top: 5px;
+                        .contact {
+                            strong {
+                                position: static;
+                            }
+                        }
+                    }
+                }
+            }
+            &.sent,
+            &.draft {
+                .details {
+                    .recipients-summary {
+                        padding-left: 12px;
+                    }
+                }
+            }
+        }
+    }
+    .message .details .action-row .pm_buttons a  { padding: 0 8px }
+}
+
+.message-summary-labels-list {
+    max-width: 100%;
+    height: 20px;
+    flex-wrap: nowrap;
+
+    .labelsMessage-label {
+        margin-top: 0;
+        margin-right: .25em;
+    }
+
+    .labelsMessage-label:not(:first-of-type) {
+      max-width: .5rem;
+      padding-right: 0;
+      overflow: hidden;
+      border-left-width: 0 !important;
+      border-radius: 0 3px 3px 0;
+    }
+
+    .labelsMessage-label:not(:first-of-type):hover {
+      border-left-width: 2px !important;
+      border-radius: 3px;
+      max-width: 8rem;
+      line-height: 14px;
+      padding: 0 .4rem;
+    }
+}
+
+.ua-safari .message-body-container a {
+    margin-left: 1px
+}
+
+/*
+    If the link is around an image by default its height = font-size + line-heigt ratio. Often < img height.
+    If pointer-events: none; on the image the link won't be extended by the browser to be around the whole image when we click.
+ */
+.message-body-container a *:not(img) {
+    pointer-events: none;
+}
+
+.proton-message-blockquote-toggle ~ * {display: none !important}
+.print .proton-message-blockquote-toggle {
+    display: none;
+    ~ * {
+        display: block !important
+    }
+}
+
+.print .protonmail_quote {
+    /* 72 DPI will let us margin 2 blockquote */
+    min-width:595px;
+}
+#conversation-view .message.message-undisclosed .recipients-summary { display: block !important }

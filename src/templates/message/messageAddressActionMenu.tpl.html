@@ -1,0 +1,61 @@
+<div class="messageAddressActionMenu-container">
+    <a class="message-address-trigger" dropdown></a>
+    <div class="pm_dropdown noPadding messageAddressActionMenu-dropdown">
+        <button
+            class="messageAddressActionMenu-btn-compose-to"
+            data-action="compose-to">
+            <div class="messageAddressActionMenu-label">
+                <i class="fa fa-envelope-o"></i>
+                <span
+                    class="messageAddressActionMenu-label-txt"
+                    translate
+                    translate-context="Action">Compose to</span>
+            </div>
+        </button>
+        <button
+            class="messageAddressActionMenu-btn-add-contact address-no-contact-only"
+            data-action="add-contact">
+            <div class="messageAddressActionMenu-label">
+                <i class="fa fa-user-plus"></i>
+                <span
+                    class="messageAddressActionMenu-label-txt"
+                    translate
+                    translate-context="Action">Add to contacts</span>
+            </div>
+        </button>
+        <button
+            class="messageAddressActionMenu-btn-copy-address"
+            data-action="contact-copy">
+            <div class="messageAddressActionMenu-label">
+                <i class="fa fa-copy"></i>
+                <span
+                    class="messageAddressActionMenu-label-txt"
+                    translate
+                    translate-context="Action">Copy address</span>
+            </div>
+        </button>
+        <button
+            class="messageAddressActionMenu-btn-show-contact address-contact-only"
+            data-action="contact-details">
+            <div class="messageAddressActionMenu-label">
+                <i class="fa fa-address-card-o"></i>
+                <span
+                    class="messageAddressActionMenu-label-txt"
+                    translate
+                    translate-context="Action">See contact details</span>
+            </div>
+        </button>
+        <button
+            ng-if="message.isInternal() && !message.isSentByMe()"
+            class="messageAddressActionMenu-btn-pin-public"
+            data-action="advanced-settings">
+            <div class="messageAddressActionMenu-label">
+                <i class="fa fa-key"></i>
+                <span
+                    class="messageAddressActionMenu-label-txt"
+                    translate
+                    translate-context="Action">Trust Public Keys</span>
+            </div>
+        </button>
+    </div>
+</div>
